@@ -2,13 +2,20 @@ package com.dostoi.applicationcontentprovider.database
 
 import android.content.ContentProvider
 import android.content.ContentValues
+import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
 
 class NotesProvider : ContentProvider() {
 
+    private lateinit var mURIMatcher: UriMatcher
+
     override fun onCreate(): Boolean {
-        TODO("Implement this to initialize your content provider on startup.")
+        mURIMatcher = UriMatcher(UriMatcher.NO_MATCH)
+        mURIMatcher.addURI(AUTHORITY, "notes", NOTES)
+        mURIMatcher.addURI(AUTHORITY, "notes/#", NOTES_BY_ID)
+
+        return true
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
@@ -38,5 +45,14 @@ class NotesProvider : ContentProvider() {
         selectionArgs: Array<String>?
     ): Int {
         TODO("Implement this to handle requests to update one or more rows.")
+    }
+
+    companion object {
+        const val AUTHORITY = "com.dostoi.applicationcontentprovider.provider"
+        val BASE_URI = Uri.parse("content://$AUTHORITY")
+        val URI_NOTES = Uri.withAppendedPath(BASE_URI, "notes")
+
+        const val NOTES = 1
+        const val NOTES_BY_ID = 2
     }
 }
