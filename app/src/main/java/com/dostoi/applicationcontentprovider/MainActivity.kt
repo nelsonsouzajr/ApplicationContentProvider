@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dostoi.applicationcontentprovider.database.NotesDatabaseHelper.Companion.TITLE_NOTES
 import com.dostoi.applicationcontentprovider.database.NotesProvider.Companion.URI_NOTES
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor> 
     lateinit var noteRecyclerView: RecyclerView
     lateinit var noteAdd: FloatingActionButton
 
+    lateinit var adapter: NotesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,7 +26,12 @@ class MainActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor> 
         noteAdd = findViewById(R.id.note_add)
         noteAdd.setOnClickListener {  }
 
+        adapter = NotesAdapter()
+        adapter.setHasStableIds(true)
+
         noteRecyclerView = findViewById(R.id.notes_recycler)
+        noteRecyclerView.layoutManager = LinearLayoutManager(this)
+        noteRecyclerView.adapter = adapter
 
 
     }
