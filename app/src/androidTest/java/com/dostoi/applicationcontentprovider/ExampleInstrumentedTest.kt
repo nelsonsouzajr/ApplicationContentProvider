@@ -1,4 +1,4 @@
-package com.dostoi.applicationcontentproveider
+package com.dostoi.applicationcontentprovider
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

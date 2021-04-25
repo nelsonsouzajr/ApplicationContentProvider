@@ -1,4 +1,4 @@
-package com.dostoi.applicationcontentproveider
+package com.dostoi.applicationcontentprovider
 
 import org.junit.Test
 
